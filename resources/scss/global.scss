@@ -1,0 +1,57 @@
+/*-- scss:uses --*/
+@use 'tufte-fonts';
+
+/*-- scss:defaults --*/
+// $grid-body-width: 900px !default;
+
+$font-family-sans-serif: "tex-gyre-pagella", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+$font-size-base: 1.1rem;
+$h1-font-size: $font-size-base * 1.875 !default;
+$h2-font-size: $font-size-base * 1.4 !default;
+$h3-font-size: $font-size-base * 1.25 !default;
+
+
+/*-- scss:rules --*/
+
+h1, h2, h3, h4 { font-style: italic; }
+
+h1.title {
+	font-style: italic;
+  font-weight: normal;
+	font-size: $font-size-base * 2.5;
+  padding-bottom: 1.5em;
+}
+
+h2 {
+  border-bottom: none;
+}
+
+#refs {
+  margin-left: 0;
+
+  .csl-entry {
+    margin-bottom: 1em;
+  }
+}
+
+.epigraphs {
+  padding: 0 15%;
+
+  .text {
+    margin-top: 2em;
+  }
+
+  .source {
+    text-align: right;
+  }
+}
+
+hr.dinkus {
+  width: 50px;
+  margin: 2em auto 2em;
+  border-top: 5px dotted #454545;
+}
+
+div.column-margin+hr.dinkus {
+  margin: 1em auto 2em;
+}

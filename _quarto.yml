@@ -1,0 +1,89 @@
+project:
+  type: book
+  preview: 
+    port: 4444
+
+book:
+  title: "Tufte-ish Quarto"
+  author: "Andrew Heiss"
+  date: "2026-05-14"
+  sidebar: 
+    style: "docked"
+  downloads:
+    - pdf
+  chapters:
+    - index.qmd
+    - 01-chapter.qmd
+    - 02-chapter.qmd
+    - references.qmd
+
+epigraphs:
+  - text: "The alternative to good statistics is not no statistics—it's bad statistics."
+    source: "Attributed to Bill James"
+  - text: "It is said that despite its many glaring (and occasionally fatal) inaccuracies, *The Hitchhiker's Guide to the Galaxy* itself has outsold *The Encyclopedia Galactica* because it is slightly cheaper, and because it has the words 'Don't Panic' in large, friendly letters on the cover."
+    source: |
+      Douglas Adams,  
+      *The Hitchhiker's Guide to the Galaxy*
+publication-details: |
+  Copyright © 2026 Author name
+  
+  *First printing, May 2026*
+
+bibliography: bib/references.bib
+csl: bib/chicago-notes-bibliography.csl
+
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: TRUE
+
+format:
+  html:
+    link-citations: false
+    reference-location: margin
+    number-depth: 0
+    theme:
+      - flatly
+      - resources/scss/global.scss
+    knitr: 
+      opts_chunk: 
+        fig.retina: 3
+        dev: "ragg_png"
+        dpi: 300
+
+  pdf:
+    documentclass: scrbook
+    classoption:
+      - twoside
+      - openright
+    papersize: a4
+    geometry:
+      - inner=2.5cm
+      - outer=7.82cm
+      - top=2.74cm
+      - bottom=2.84cm
+      - marginparwidth=5.12cm
+      - marginparsep=0.7cm
+      - headsep=1cm
+      - heightrounded
+    include-in-header:
+      - resources/tex/custom.tex
+    fontsize: 10pt
+    mainfont: "TeX Gyre Pagella"
+    mainfontoptions: 
+      - Numbers=OldStyle
+      - Numbers=Proportional
+    sansfont: "Helvetica Neue"
+    monofont: "Courier New"
+    number-sections: true
+    reference-location: margin
+    # cap-location: margin
+    colorlinks: true
+    toc: true
+    toc-depth: 1
+    toc-title: "Contents"
+    toccolor: "black"
+    keep-tex: false
+    number-depth: 0
+    filters:
+      - filters/front-matter.lua

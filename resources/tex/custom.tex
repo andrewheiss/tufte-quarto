@@ -1,0 +1,199 @@
+\usepackage{ragged2e}
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage{etoolbox}
+\usepackage{enumitem}
+\usepackage{epigraph}
+
+\AtBeginDocument{%
+  \fontsize{10pt}{14pt}\selectfont
+  \RaggedRight
+  \setlength{\parindent}{1.2em}
+  \setlength{\parskip}{0pt}
+}
+
+
+% ----------------------
+% Running header stuff
+% ----------------------
+\newcommand{\bookheadtitle}{Tufte-ish Quarto}
+
+\clearpairofpagestyles
+\automark{chapter}
+\setheadwidth{textwithmarginpar}
+\setfootwidth{textwithmarginpar}
+
+\renewcommand*{\chaptermarkformat}{}
+\renewcommand*{\chaptermark}[1]{\markboth{#1}{}}
+
+% Small caps, force capital letters to also be small caps
+\newcommand{\headerfont}[1]{{
+  \upshape
+  \addfontfeatures{Letters=SmallCaps,Letters=UppercaseSmallCaps}
+  \small #1
+}}
+
+\lehead{\headerfont{\pagemark\quad\bookheadtitle}}
+\rohead{\headerfont{\leftmark\quad\pagemark}}
+
+
+% --------------------
+% Front matter stuff
+% --------------------
+% Title page
+\setkomafont{title}{\normalfont\fontsize{48}{52}\selectfont\itshape}
+\setkomafont{subtitle}{\normalfont\large}
+\setkomafont{author}{\normalfont\huge}
+\setkomafont{date}{\normalfont\normalsize}
+
+\makeatletter
+\renewcommand*{\maketitle}{%
+  \begin{titlepage}
+    \raggedright
+    % \vspace*{4cm}
+    {\usekomafont{author}\@author\par}
+    \vspace{4cm}
+    {\usekomafont{title}\@title\par}
+    % \vspace{0.5em}
+    % {\usekomafont{date}\@date\par}
+  \end{titlepage}
+}
+\makeatother
+
+% Epigraphs
+\setlength{\epigraphrule}{0em}
+% \setlength{\beforeepigraphskip}{-2em}
+\setlength{\afterepigraphskip}{2em}
+\setlength{\epigraphwidth}{0.75\textwidth}
+\renewcommand{\epigraphsize}{\normalsize}
+
+
+% ---------------------------
+% Chapter and heading stuff
+% ---------------------------
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{plain}
+
+\renewcommand{\chapterformat}{\thechapter:\enskip}
+
+\setkomafont{chapter}{\normalfont\huge\itshape}
+\setkomafont{section}{\normalfont\large\itshape}
+\setkomafont{subsection}{\normalfont\normalsize\itshape}
+
+\RedeclareSectionCommand[
+  beforeskip=50pt,
+  afterskip=40pt,
+  afterindent=false
+]{chapter}
+
+\RedeclareSectionCommand[
+  beforeskip=1.5\baselineskip,
+  afterskip=0.83\baselineskip,
+  afterindent=false
+]{section}
+
+\RedeclareSectionCommand[
+  beforeskip=3.25ex plus 1ex minus .2ex,
+  afterskip=1.5ex plus .2ex,
+  afterindent=false
+]{subsection}
+
+
+% ----------------------
+% Margin content stuff
+% ----------------------
+% Paragraph spacing in margin content is goofy because there are two types of
+% margin content in Quarto:
+%
+% .column-margin divs:
+%
+% ::: {.column-margin}
+% Here's some text.
+%
+% More text here.
+% :::
+%
+% ...and footnotes:
+%
+% [^note]: Here's a note.
+%
+%     More text here.
+%
+%
+% .column-margin divs use marginnote; footnotes use sidenotes. 
+% Both packages work differently :(
+
+% Add paragraph spacing for marginnotes
+\AtBeginDocument{%
+  \renewcommand{\marginfont}{\setlength{\parskip}{5pt}\setlength{\parindent}{0pt}}
+}
+
+% Add paragraph spacing for sidenotes
+\makeatletter
+\let\oldmarginparreset\@marginparreset
+\renewcommand{\@marginparreset}{%
+  \oldmarginparreset
+  \setlength{\parskip}{5pt}%
+  \setlength{\parindent}{0pt}%
+}
+\makeatother
+
+
+% --------------------------
+% Other text styling stuff
+% --------------------------
+
+% Captions
+\setcapindent{0pt}
+\setkomafont{caption}{\small}
+\setkomafont{captionlabel}{\small}
+
+% Block quotes
+% 9pt with proportional leading (9 × 1.4 = 12.6pt) to match body ratio
+\AtBeginEnvironment{quote}{\fontsize{9}{12.6}\selectfont}
+\AtBeginEnvironment{quotation}{\fontsize{9}{12.6}\selectfont}
+
+% Lists
+\setlist[itemize]{
+  itemsep=0.35\baselineskip, 
+  topsep=0.35\baselineskip, 
+  leftmargin=*
+}
+
+\setlist[enumerate]{
+  itemsep=0.35\baselineskip, 
+  topsep=0.35\baselineskip, 
+  leftmargin=*
+}
+
+% Recreate Quarto/Pandoc's CSL reference list but shrink the space between items
+% to be 0.35 × baseline
+\AtBeginDocument{%
+  \renewenvironment{CSLReferences}[2]
+  {\begin{list}{}{%
+    \setlength{\itemindent}{0pt}%
+    \setlength{\leftmargin}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \ifodd #1
+    \setlength{\leftmargin}{\cslhangindent}%
+    \setlength{\itemindent}{-\cslhangindent}%
+    \fi
+    \setlength{\itemsep}{0.35\baselineskip}}}  % This is different from original
+  {\end{list}}%
+}
+
+% Better widow/orphan control
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\brokenpenalty=4000
+
+% TOC things
+\addtokomafont{chapterentry}{\normalfont\itshape\large}
+\addtokomafont{chapterentrypagenumber}{\normalfont\itshape\large}
+
+\newcommand*{\addcolon}[1]{#1:\enskip}
+\DeclareTOCStyleEntry[
+  linefill=\qquad,  % Space between entry and page number
+  beforeskip=2em,
+  entrynumberformat=\addcolon
+]{tocline}{chapter}

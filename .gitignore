@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+# Output
+_book
+
+/.luarc.json
+
+**/*.quarto_ipynb
