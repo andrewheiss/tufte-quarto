@@ -11,6 +11,8 @@ book:
     style: "docked"
   downloads:
     - pdf
+  repo-url: "https://github.com/andrewheiss/tufte-quarto"
+  repo-actions: [source]
   chapters:
     - index.qmd
     - 01-chapter.qmd
