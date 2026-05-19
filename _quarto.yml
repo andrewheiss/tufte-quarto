@@ -77,6 +77,9 @@ format:
       - Numbers=Proportional
     sansfont: "Helvetica Neue"
     monofont: "Courier New"
+    code-line-numbers: true
+    code-block-bg: false
+    syntax-highlighting: printing
     number-sections: true
     reference-location: margin
     # cap-location: margin

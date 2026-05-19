@@ -197,3 +197,18 @@
   beforeskip=2em,
   entrynumberformat=\addcolon
 ]{tocline}{chapter}
+
+% Code things
+\usepackage{fvextra}
+% \fvset{frame=single, framerule=0.4pt, framesep=3mm, rulecolor=\color{gray!60}, breaklines=true}
+\fvset{frame=single, framerule=0.4pt, framesep=3mm, rulecolor=\color{gray!60}, breaklines=true, breaksymbol={}, breakindent=2em}
+% \fvset{
+%   frame=leftline,
+%   framerule=0.4pt,
+%   rulecolor=\color{gray}
+% }
+
+\AtBeginEnvironment{Shaded}{\small}
+\AtBeginEnvironment{Highlighting}{\renewcommand{\theFancyVerbLine}{%
+  \scriptsize\arabic{FancyVerbLine}%
+}}
